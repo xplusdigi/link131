@@ -17,11 +17,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { brands, recentUpdates, statusOptions } from '../data/brands';
-import { copyToClipboard } from '../utils/clipboard';
-import BrandCard from '../components/BrandCard';
-import Layout from '../components/Layout';
+import { useLocalStorage } from './hooks/useLocalStorage';
+import { brands, recentUpdates, statusOptions } from './data/brands';
+import { copyToClipboard } from './utils/clipboard';
+import BrandCard from './components/BrandCard';
+import Layout from './components/Layout';
 
 const Home = () => {
   
