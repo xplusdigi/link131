@@ -16,7 +16,7 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { brands, recentUpdates, statusOptions } from '../data/brands';
 import { copyToClipboard } from '../utils/clipboard';
