@@ -18,32 +18,9 @@ import { useState, useEffect } from 'react';
  * @returns {[any, function]} - 返回[值, 设置函数]
  */
 export const useLocalStorage = (key, initialValue) => {
-  // 获取初始值的函数
-  const getInitialValue = () => {
-    // SSR兼容性检查
-    if (typeof window === 'undefined') {
-      return initialValue;
-    }
-
-    try {
-      // 尝试从localStorage获取数据
-      const item = window.localStorage.getItem(key);
-      
-      // 如果存在数据，解析并返回
-      if (item !== null) {
-        return JSON.parse(item);
-      }
-      
-      // 如果不存在，返回初始值
-      return initialValue;
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
-      return initialValue;
-    }
-  };
-
-  // 状态管理
-  const [storedValue, setStoredValue] = useState(getInitialValue);
+  // 状态管理 - 始终从初始值开始，避免hydration不匹配
+  const [storedValue, setStoredValue] = useState(initialValue);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // 设置值的函数
   const setValue = (value) => {
@@ -109,24 +86,24 @@ export const useLocalStorage = (key, initialValue) => {
     };
   }, [key]);
 
-  // 页面初始化时重新同步（确保最新值）
+  // 页面初始化时从localStorage加载值（仅在客户端）
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const item = window.localStorage.getItem(key);
-      if (item !== null) {
-        try {
+      try {
+        const item = window.localStorage.getItem(key);
+        if (item !== null) {
           const parsedItem = JSON.parse(item);
-          if (JSON.stringify(parsedItem) !== JSON.stringify(storedValue)) {
-            setStoredValue(parsedItem);
-          }
-        } catch (error) {
-          console.warn(`Error parsing localStorage value for key "${key}":`, error);
+          setStoredValue(parsedItem);
         }
+      } catch (error) {
+        console.warn(`Error parsing localStorage value for key "${key}":`, error);
+      } finally {
+        setIsLoaded(true);
       }
     }
-  }, []);
+  }, [key]);
 
-  return [storedValue, setValue];
+  return [storedValue, setValue, isLoaded];
 };
 
 /**

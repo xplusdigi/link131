@@ -194,25 +194,21 @@ export const statusOptions = [
   {
     value: 'all',
     label: 'All Status',
-    labelCn: '全部状态',
     count: brands.length
   },
   {
     value: 'active',
     label: 'Active',
-    labelCn: '活跃',
     count: brands.filter(b => b.status === 'active').length
   },
   {
     value: 'updating',
     label: 'Updating',
-    labelCn: '更新中',
     count: brands.filter(b => b.status === 'updating').length
   },
   {
     value: 'inactive',
     label: 'Inactive',
-    labelCn: '不活跃',
     count: brands.filter(b => b.status === 'inactive').length
   }
 ];
@@ -221,33 +217,27 @@ export const statusOptions = [
 export const categoryOptions = [
   {
     value: 'all',
-    label: 'All Categories',
-    labelCn: '全部分类'
+    label: 'All Categories'
   },
   {
     value: 'Sports Betting',
-    label: 'Sports Betting',
-    labelCn: '体育博彩'
+    label: 'Sports Betting'
   },
   {
     value: 'Live Casino',
-    label: 'Live Casino',
-    labelCn: '真人娱乐场'
+    label: 'Live Casino'
   },
   {
     value: 'Slots',
-    label: 'Slots',
-    labelCn: '老虎机'
+    label: 'Slots'
   },
   {
     value: 'Lottery',
-    label: 'Lottery',
-    labelCn: '彩票'
+    label: 'Lottery'
   },
   {
     value: 'Bingo',
-    label: 'Bingo',
-    labelCn: '宾果'
+    label: 'Bingo'
   }
 ];
 
@@ -255,28 +245,23 @@ export const categoryOptions = [
 export const sortOptions = [
   {
     value: 'name',
-    label: 'Name A-Z',
-    labelCn: '名称 A-Z'
+    label: 'Name A-Z'
   },
   {
     value: 'name_desc',
-    label: 'Name Z-A',
-    labelCn: '名称 Z-A'
+    label: 'Name Z-A'
   },
   {
     value: 'rating',
-    label: 'Rating High-Low',
-    labelCn: '评分从高到低'
+    label: 'Rating High-Low'
   },
   {
     value: 'updated',
-    label: 'Recently Updated',
-    labelCn: '最近更新'
+    label: 'Recently Updated'
   },
   {
     value: 'status',
-    label: 'Status',
-    labelCn: '状态'
+    label: 'Status'
   }
 ];
 

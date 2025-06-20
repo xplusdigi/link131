@@ -14,8 +14,6 @@ import BottomNavigation from './BottomNavigation';
 
 const Layout = ({ 
   children, 
-  theme, 
-  onThemeToggle,
   showBackButton = false,
   title = "BetLink",
   showBottomNav = true,
@@ -23,17 +21,15 @@ const Layout = ({
   currentPath = ""
 }) => {
   return (
-    <div className={`min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 ${className}`}>
+    <div className={`min-h-screen bg-gray-50 ${className}`}>
       {/* 顶部导航栏 */}
       <Header 
-        theme={theme}
-        onThemeToggle={onThemeToggle}
         showBackButton={showBackButton}
         title={title}
       />
       
       {/* 主要内容区域 - 为底部导航栏预留空间 */}
-      <main className={`${showBottomNav ? 'pb-20 md:pb-8' : 'pb-8'}`}>
+      <main className={`${showBottomNav ? 'pb-20 md:pb-20' : 'pb-8'}`}>
         {children}
       </main>
       

@@ -13,45 +13,55 @@ import Link from 'next/link';
 
 const BottomNavigation = ({ 
   className = "",
-  hideOnDesktop = true,
+  hideOnDesktop = false,
   currentPath = "" 
 }) => {
   
   // 导航项配置
   const navItems = [
     {
-      href: '/home',
+      href: '/',
       icon: 'fas fa-home',
-      label: 'Home',
-      labelCn: '主页'
+      label: 'Home'
     },
     {
       href: '/favorites', 
       icon: 'fas fa-heart',
-      label: 'Favorites',
-      labelCn: '收藏'
+      label: 'Favorites'
     },
     {
       href: '/about',
       icon: 'fas fa-info-circle', 
-      label: 'About',
-      labelCn: '关于'
+      label: 'About'
     },
     {
       href: '/contact',
       icon: 'fas fa-envelope',
-      label: 'Contact', 
-      labelCn: '联系'
+      label: 'Contact'
     }
   ];
 
   // 检查当前路径是否为活跃状态
   const isActive = (href) => {
     if (currentPath) {
-      return currentPath === href || currentPath.startsWith(href);
+      // 特殊处理根路径
+      if (href === '/' && currentPath === '/') {
+        return true;
+      }
+      if (href !== '/') {
+        return currentPath === href || currentPath.startsWith(href);
+      }
+      return currentPath === href;
     }
     if (typeof window !== 'undefined') {
-      return window.location.pathname === href || window.location.pathname.startsWith(href);
+      // 特殊处理根路径
+      if (href === '/' && window.location.pathname === '/') {
+        return true;
+      }
+      if (href !== '/') {
+        return window.location.pathname === href || window.location.pathname.startsWith(href);
+      }
+      return window.location.pathname === href;
     }
     return false;
   };
@@ -59,8 +69,8 @@ const BottomNavigation = ({
   return (
     <nav className={`
       fixed bottom-0 left-0 right-0 z-50
-      bg-white dark:bg-gray-800 
-      border-t border-gray-200 dark:border-gray-700 
+      bg-white 
+      border-t border-gray-200 
       ${hideOnDesktop ? 'md:hidden' : ''} 
       ${className}
     `}>
@@ -76,11 +86,11 @@ const BottomNavigation = ({
                 relative flex flex-col items-center py-2 px-3 
                 transition-colors duration-200
                 ${active 
-                  ? 'text-blue-600 dark:text-blue-400' 
-                  : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+                  ? 'text-blue-600' 
+                  : 'text-gray-600 hover:text-blue-600'
                 }
               `}
-              title={item.labelCn}
+              title={item.label}
             >
               {/* 图标 */}
               <i className={`${item.icon} text-lg mb-1`}></i>
@@ -90,7 +100,7 @@ const BottomNavigation = ({
               
               {/* 活跃状态指示器 */}
               {active && (
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></div>
               )}
             </Link>
           );

@@ -24,11 +24,11 @@ react-nextjs-version/
 ### 1. 🔄 **可重用性 (Reusability)**
 ```jsx
 // 可以在多个页面使用相同的导航栏
-<Layout theme={theme} onThemeToggle={toggleTheme}>
+<Layout>
   <HomePage />
 </Layout>
 
-<Layout theme={theme} onThemeToggle={toggleTheme}>
+<Layout>
   <FavoritesPage />
 </Layout>
 ```
@@ -50,9 +50,9 @@ react-nextjs-version/
 import { render, screen } from '@testing-library/react';
 import Header from './Header';
 
-test('renders theme toggle button', () => {
-  render(<Header theme="dark" onThemeToggle={() => {}} />);
-  expect(screen.getByRole('button')).toBeInTheDocument();
+test('renders header component', () => {
+  render(<Header title="BetLink" />);
+  expect(screen.getByText('BetLink')).toBeInTheDocument();
 });
 ```
 
@@ -73,8 +73,6 @@ test('renders theme toggle button', () => {
 ### Header 组件
 ```jsx
 <Header 
-  theme="dark"                    // 当前主题
-  onThemeToggle={toggleTheme}     // 主题切换回调
   showBackButton={false}          // 是否显示返回按钮
   title="BetLink"                 // 网站标题
   className=""                    // 自定义样式类
@@ -93,8 +91,6 @@ test('renders theme toggle button', () => {
 ### Layout 组件
 ```jsx
 <Layout 
-  theme={theme}                   // 主题状态
-  onThemeToggle={toggleTheme}     // 主题切换函数
   showBackButton={false}          // 顶部是否显示返回按钮
   title="BetLink"                 // 页面标题
   showBottomNav={true}            // 是否显示底部导航
@@ -129,7 +125,7 @@ const Home = () => {
 ```jsx
 const Home = () => {
   return (
-    <Layout theme={theme} onThemeToggle={toggleTheme}>
+    <Layout>
       {/* 只需要关注页面内容 */}
       <div>页面内容...</div>
     </Layout>
@@ -145,9 +141,9 @@ const Home = () => {
 - Layout: 统一管理间距和布局
 
 ### 🎯 状态管理
-- 主题状态在Layout层管理
 - 导航状态独立维护
 - 页面状态与导航状态分离
+- 本地存储状态管理
 
 ### 🔄 扩展性
 - 添加新页面只需要包装Layout组件
@@ -158,14 +154,14 @@ const Home = () => {
 
 ### 主页
 ```jsx
-<Layout theme={theme} onThemeToggle={toggleTheme} currentPath="/home">
+<Layout currentPath="/home">
   <HomePage />
 </Layout>
 ```
 
 ### 收藏页 
 ```jsx
-<Layout theme={theme} onThemeToggle={toggleTheme} currentPath="/favorites">
+<Layout currentPath="/favorites">
   <FavoritesPage />
 </Layout>
 ```
@@ -173,8 +169,6 @@ const Home = () => {
 ### 详情页（带返回按钮）
 ```jsx
 <Layout 
-  theme={theme} 
-  onThemeToggle={toggleTheme} 
   showBackButton={true}
   title="Brand Details"
 >
