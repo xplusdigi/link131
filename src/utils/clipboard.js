@@ -230,11 +230,13 @@ export const copyUrlWithInfo = async (url, title = '', description = '') => {
   return await copyToClipboard(textToCopy);
 };
 
-export default {
+const clipboardUtils = {
   copyToClipboard,
   isClipboardSupported,
   readFromClipboard,
   requestClipboardPermission,
   copyRichTextToClipboard,
   copyUrlWithInfo
-}; 
+};
+
+export default clipboardUtils; 

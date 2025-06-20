@@ -22,13 +22,13 @@ export default function FavoritesPage() {
   
   // 状态管理
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
-  const [copiedUrl, setCopiedUrl] = React.useState(null);
+  const [copiedUrl, setCopiedUrl] = React.useState<number | null>(null);
 
   // 获取收藏的品牌详细信息
   const favoriteBrands = brands.filter(brand => favorites.includes(brand.id));
 
   // 复制URL功能
-  const copyUrl = async (url, id) => {
+  const copyUrl = async (url: string, id: number) => {
     const success = await copyToClipboard(url);
     if (success) {
       setCopiedUrl(id);
@@ -37,8 +37,8 @@ export default function FavoritesPage() {
   };
 
   // 切换收藏状态
-  const toggleFavorite = (brandId) => {
-    const newFavorites = favorites.filter(id => id !== brandId);
+  const toggleFavorite = (brandId: number) => {
+    const newFavorites = favorites.filter((id: number) => id !== brandId);
     setFavorites(newFavorites);
   };
 

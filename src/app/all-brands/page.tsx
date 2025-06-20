@@ -25,9 +25,9 @@ export default function AllBrandsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeStatus, setActiveStatus] = useState('all');
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
-  const [copiedUrl, setCopiedUrl] = useState(null);
+  const [copiedUrl, setCopiedUrl] = useState<number | null>(null);
 
-  const copyUrl = async (url, id) => {
+  const copyUrl = async (url: string, id: number) => {
     const success = await copyToClipboard(url);
     if (success) {
       setCopiedUrl(id);
@@ -35,9 +35,9 @@ export default function AllBrandsPage() {
     }
   };
 
-  const toggleFavorite = (brandId) => {
+  const toggleFavorite = (brandId: number) => {
     const newFavorites = favorites.includes(brandId)
-      ? favorites.filter(id => id !== brandId)
+      ? favorites.filter((id: number) => id !== brandId)
       : [...favorites, brandId];
     setFavorites(newFavorites);
   };

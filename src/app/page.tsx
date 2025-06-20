@@ -30,14 +30,14 @@ const Page = () => {
   const [activeStatus, setActiveStatus] = useState('all'); // 当前选中的状态筛选项（全部/活跃/更新中/不活跃）
   const [showSearchResults, setShowSearchResults] = useState(false); // 是否显示搜索结果下拉框
   const [favorites, setFavorites] = useLocalStorage('favorites', []); // 收藏列表，存储在本地存储中
-  const [copiedUrl, setCopiedUrl] = useState(null); // 记录当前复制的URL的ID，用于显示"已复制"状态
+  const [copiedUrl, setCopiedUrl] = useState<number | null>(null); // 记录当前复制的URL的ID，用于显示"已复制"状态
 
   /**
    * 复制URL到剪贴板功能
    * @param {string} url - 要复制的URL
    * @param {number} id - 品牌ID，用于显示复制状态
    */
-  const copyUrl = async (url, id) => {
+  const copyUrl = async (url: string, id: number) => {
     const success = await copyToClipboard(url);
     if (success) {
       setCopiedUrl(id); // 设置复制状态，显示"已复制"
@@ -49,9 +49,9 @@ const Page = () => {
    * 收藏/取消收藏功能
    * @param {number} brandId - 品牌ID
    */
-  const toggleFavorite = (brandId) => {
+  const toggleFavorite = (brandId: number) => {
     const newFavorites = favorites.includes(brandId)
-      ? favorites.filter(id => id !== brandId) // 如果已收藏，则移除
+      ? favorites.filter((id: number) => id !== brandId) // 如果已收藏，则移除
       : [...favorites, brandId]; // 如果未收藏，则添加
     
     setFavorites(newFavorites); // 更新收藏列表并自动保存到本地存储
