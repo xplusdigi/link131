@@ -125,23 +125,36 @@ function BrandDetailsContent() {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Brand Header */}
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 mb-8 p-8">
-          <div className="flex flex-col md:flex-row items-start gap-6">
+        <div className="relative bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/30 mb-12 p-8 overflow-hidden">
+          {/* 背景装饰 */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-indigo-50/50 to-purple-50/50"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-full blur-3xl -z-10"></div>
+          
+          <div className="relative flex flex-col md:flex-row items-start gap-8">
             <div className="flex-shrink-0">
-              <div className="w-24 h-24 bg-gray-200 rounded-lg flex items-center justify-center text-gray-600 font-bold text-xl">
-                {brand.name.charAt(0)}
+              <div className="relative group">
+                <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl flex items-center justify-center text-blue-600 font-bold text-3xl shadow-xl">
+                  {brand.name.charAt(0)}
+                </div>
+                {/* Logo装饰光晕 */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
               </div>
             </div>
             
             <div className="flex-1 min-w-0">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{brand.name}</h1>
+              <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-gray-800 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+                {brand.name}
+              </h1>
               
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex items-center gap-1">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-1 p-2 bg-yellow-50 rounded-xl">
                   {renderStars(brand.rating)}
                 </div>
-                <span className="text-xl font-semibold">{brand.rating}</span>
-                <span className="text-gray-500">/ 5.0</span>
+                <span className="text-2xl font-bold text-gray-800">{brand.rating}</span>
+                <span className="text-gray-500 text-lg">/ 5.0</span>
+                <span className="px-3 py-1 bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-800 rounded-full text-sm font-semibold">
+                  ⭐ Rated
+                </span>
               </div>
               
               <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-4">
@@ -154,44 +167,50 @@ function BrandDetailsContent() {
               </p>
             </div>
             
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               <a
                 href={brand.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors text-center"
+                className="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-2xl font-bold hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 active:scale-95 text-center shadow-lg hover:shadow-xl"
               >
-                🌐 Visit Site
+                <span className="flex items-center justify-center">
+                  🌐 Visit Site
+                  <i className="fas fa-external-link-alt ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </span>
+                <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
               </a>
               
-              <button
-                onClick={() => copyUrl(brand.url, brand.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                  copiedUrl === brand.id
-                    ? 'bg-green-500 text-white' 
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
-              >
-                {copiedUrl === brand.id ? '✓ Copied!' : '📋 Copy URL'}
-              </button>
-              
-              <button
-                onClick={() => toggleFavorite(brand.id)}
-                className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                  favorites.includes(brand.id)
-                    ? 'bg-red-500 text-white hover:bg-red-600'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                {favorites.includes(brand.id) ? '♥ Saved' : '♡ Save'}
-              </button>
-              
-              <button
-                onClick={shareUrl}
-                className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
-              >
-                📤 Share
-              </button>
+              <div className="grid grid-cols-3 gap-3">
+                <button
+                  onClick={() => copyUrl(brand.url, brand.id)}
+                  className={`group relative px-4 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg ${
+                    copiedUrl === brand.id
+                      ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-green-200' 
+                      : 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-blue-200'
+                  }`}
+                >
+                  {copiedUrl === brand.id ? '✓' : '📋'}
+                </button>
+                
+                <button
+                  onClick={() => toggleFavorite(brand.id)}
+                  className={`group relative px-4 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg ${
+                    favorites.includes(brand.id)
+                      ? 'bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-red-200'
+                      : 'bg-gradient-to-r from-gray-400 to-gray-500 text-white hover:from-gray-500 hover:to-gray-600 shadow-gray-200'
+                  }`}
+                >
+                  {favorites.includes(brand.id) ? '♥' : '♡'}
+                </button>
+                
+                <button
+                  onClick={shareUrl}
+                  className="group relative px-4 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl font-semibold hover:from-purple-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-purple-200"
+                >
+                  📤
+                </button>
+              </div>
             </div>
           </div>
         </div>

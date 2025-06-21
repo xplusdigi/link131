@@ -16,7 +16,7 @@ const Header = ({
   className = "" 
 }) => {
   return (
-    <header className={`bg-white shadow-sm border-b border-gray-200 ${className}`}>
+    <header className={`bg-white/80 backdrop-blur-md shadow-lg border-b border-white/20 sticky top-0 z-50 ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* 左侧：Logo/返回按钮 + 网站名称 */}
@@ -25,24 +25,38 @@ const Header = ({
             {showBackButton && (
               <button
                 onClick={() => window.history.back()}
-                className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+                className="p-2.5 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition-all duration-200 transform hover:scale-105 active:scale-95"
                 title="Go back"
               >
-                <i className="fas fa-arrow-left"></i>
+                <i className="fas fa-arrow-left text-lg"></i>
               </button>
             )}
             
             {/* 网站Logo和名称 */}
             <Link 
               href="/" 
-              className="flex items-center space-x-2 text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
+              className="flex items-center space-x-3 text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105"
             >
-              <i className="fas fa-link text-blue-600"></i>
-              <span>{title}</span>
+              <div className="relative">
+                <i className="fas fa-link text-2xl bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent"></i>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur opacity-20 animate-pulse"></div>
+              </div>
+              <span className="font-extrabold tracking-tight">{title}</span>
             </Link>
+          </div>
+          
+          {/* 右侧：搜索按钮（可扩展） */}
+          <div className="flex items-center space-x-2">
+            <div className="hidden sm:flex items-center px-3 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl text-gray-500 text-sm">
+              <i className="fas fa-search mr-2"></i>
+              <span>Search brands...</span>
+            </div>
           </div>
         </div>
       </div>
+      
+      {/* 添加渐变边框效果 */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
     </header>
   );
 };

@@ -21,7 +21,7 @@ const Layout = ({
   currentPath = ""
 }) => {
   return (
-    <div className={`min-h-screen bg-gray-50 ${className}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 ${className}`}>
       {/* 顶部导航栏 */}
       <Header 
         showBackButton={showBackButton}
@@ -29,8 +29,10 @@ const Layout = ({
       />
       
       {/* 主要内容区域 - 为底部导航栏预留空间 */}
-      <main className={`${showBottomNav ? 'pb-20 md:pb-20' : 'pb-8'}`}>
-        {children}
+      <main className={`transition-all duration-300 ease-in-out ${showBottomNav ? 'pb-20 md:pb-20' : 'pb-8'}`}>
+        <div className="animate-fadeIn">
+          {children}
+        </div>
       </main>
       
       {/* 底部导航栏 */}
@@ -39,6 +41,24 @@ const Layout = ({
           currentPath={currentPath}
         />
       )}
+      
+      {/* 添加自定义动画样式 */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

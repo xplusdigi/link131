@@ -73,79 +73,127 @@ const Page = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* 欢迎区域和搜索功能 */}
-        <section className="text-center mb-12">
-          {/* 页面标题和描述 */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to BetLink
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Quickly find the latest available URLs for major Philippine betting brands
-          </p>
+        <section className="relative text-center mb-16 py-12">
+          {/* 背景装饰 */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-3xl -z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-3xl -z-10 animate-pulse"></div>
           
-          {/* 搜索栏 */}
-          <div className="relative max-w-md mx-auto">
-            {/* 搜索图标 */}
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <i className="fas fa-search text-gray-400"></i>
-            </div>
-            {/* 搜索输入框 */}
-            <input
-              type="text"
-              placeholder="Search brand name..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value); // 更新搜索关键词
-                setShowSearchResults(e.target.value.length > 0); // 显示/隐藏搜索结果
-              }}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-900"
-            />
-            {/* 搜索结果下拉框（预留功能） */}
-            {showSearchResults && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
-                <div className="p-4 text-sm text-gray-500">
-                  Search results will appear here...
+          {/* 页面标题和描述 */}
+          <div className="relative z-10">
+            <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6 animate-fadeIn">
+              Welcome to BetLink
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+              🎰 Quickly find the latest available URLs for major Philippine betting brands 🇵🇭
+            </p>
+            
+            {/* 搜索栏 */}
+            <div className="relative max-w-lg mx-auto group">
+              {/* 搜索栏装饰光晕 */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+              
+              <div className="relative">
+                {/* 搜索图标 */}
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <i className="fas fa-search text-blue-500 text-lg"></i>
+                </div>
+                
+                {/* 搜索输入框 */}
+                <input
+                  type="text"
+                  placeholder="🔍 Search brand name..."
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSearchResults(e.target.value.length > 0);
+                  }}
+                  className="w-full pl-12 pr-6 py-4 border-2 border-white/50 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 bg-white/80 backdrop-blur-sm text-gray-900 shadow-xl transition-all duration-300 text-lg font-medium placeholder-gray-500"
+                />
+                
+                {/* 搜索按钮 */}
+                <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
+                  <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
+                    <i className="fas fa-arrow-right"></i>
+                  </button>
                 </div>
               </div>
-            )}
+              
+              {/* 搜索结果下拉框 */}
+              {showSearchResults && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white/90 backdrop-blur-md border border-white/30 rounded-2xl shadow-2xl z-20 overflow-hidden">
+                  <div className="p-6 text-sm text-gray-500">
+                    🔍 Search results will appear here...
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* 统计信息 */}
+            <div className="flex justify-center items-center gap-8 mt-8 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span>{brands.filter(b => b.status === 'active').length} Active Brands</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                <span>{brands.length} Total Brands</span>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* 状态筛选导航 */}
-        <section className="mb-8">
-          <div className="flex flex-wrap justify-center gap-2">
-            {statusOptions.map((status) => (
-              <button
-                key={status.value}
-                onClick={() => setActiveStatus(status.value)} // 切换筛选状态
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  activeStatus === status.value
-                    ? 'bg-blue-600 text-white' // 选中状态样式
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300' // 未选中状态样式
-                }`}
-                title={`Filter ${status.label} brands`}
-              >
-                {status.label}
-              </button>
-            ))}
+        <section className="mb-12">
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">Filter by Status</h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {statusOptions.map((status) => (
+                <button
+                  key={status.value}
+                  onClick={() => setActiveStatus(status.value)}
+                  className={`relative px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg ${
+                    activeStatus === status.value
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-200' 
+                      : 'bg-white/70 backdrop-blur-sm text-gray-700 hover:bg-white hover:shadow-xl border border-white/50'
+                  }`}
+                  title={`Filter ${status.label} brands`}
+                >
+                  {/* 选中状态装饰 */}
+                  {activeStatus === status.value && (
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-30"></div>
+                  )}
+                  <span className="relative">{status.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* 热门品牌展示区域 */}
-        <section className="mb-12">
-          <div className="flex justify-between items-center mb-6">
+        <section className="mb-16">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
             {/* 区域标题 */}
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-              <i className="fas fa-fire text-orange-500 mr-2"></i>
-              Hot Brands
-            </h2>
+            <div className="flex items-center">
+              <div className="relative mr-3">
+                <i className="fas fa-fire text-3xl bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"></i>
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full blur opacity-30 animate-pulse"></div>
+              </div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent">
+                Hot Brands
+              </h2>
+            </div>
+            
             {/* 查看全部按钮 */}
             <a
               href="/all-brands"
-              className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+              className="group relative px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl hover:from-blue-700 hover:to-indigo-700 font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
               title="View all brands"
             >
-              View All
-              <span className="ml-1">→</span>
+              <span className="flex items-center">
+                View All Brands
+                <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+              </span>
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
             </a>
           </div>
           
@@ -176,48 +224,65 @@ const Page = () => {
         </section>
 
         {/* 最近更新区域 */}
-        <section>
-          <div className="flex justify-between items-center mb-6">
-            {/* 区域标题 */}
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-              <i className="fas fa-clock text-blue-500 mr-2"></i>
-              Recent Updates
-            </h2>
-            {/* 刷新按钮 */}
-            <button
-              onClick={() => window.location.reload()} // 刷新页面获取最新数据
-              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center"
-              title="Refresh page to get latest data"
-            >
-              <i className="fas fa-sync-alt mr-2"></i>
-              Refresh
-            </button>
-          </div>
+        <section className="relative">
+          {/* 背景装饰 */}
+          <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-emerald-50 rounded-3xl -z-10"></div>
           
-          {/* 更新列表 */}
-          <div className="bg-white rounded-lg shadow-md border border-gray-200 divide-y divide-gray-200">
-            {recentUpdates.map((update, index) => (
-              <div key={index} className="p-4 flex justify-between items-center">
-                {/* 更新信息 */}
-                <div>
-                  <div className="font-medium text-gray-900">
-                    {update.brandName}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {update.message}
-                  </div>
+          <div className="relative p-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+              {/* 区域标题 */}
+              <div className="flex items-center">
+                <div className="relative mr-3">
+                  <i className="fas fa-clock text-3xl bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent"></i>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full blur opacity-30 animate-pulse"></div>
                 </div>
-                {/* 更新状态和时间 */}
-                <div className="text-right">
-                  <span className="inline-block px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium mb-1">
-                    Updated (已更新)
-                  </span>
-                  <div className="text-sm text-gray-500">
-                    {update.date}
-                  </div>
-                </div>
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent">
+                  Recent Updates
+                </h2>
               </div>
-            ))}
+              
+              {/* 刷新按钮 */}
+              <button
+                onClick={() => window.location.reload()}
+                className="group relative px-6 py-3 bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl text-gray-700 hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold"
+                title="Refresh page to get latest data"
+              >
+                <span className="flex items-center">
+                  <i className="fas fa-sync-alt mr-2 group-hover:rotate-180 transition-transform duration-500"></i>
+                  Refresh
+                </span>
+              </button>
+            </div>
+            
+            {/* 更新列表 */}
+            <div className="space-y-4">
+              {recentUpdates.map((update, index) => (
+                <div key={index} className="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/40 p-6 hover:shadow-xl hover:bg-white transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    {/* 更新信息 */}
+                    <div className="flex-1">
+                      <div className="font-bold text-gray-900 text-lg mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                        {update.brandName}
+                      </div>
+                      <div className="text-gray-600 leading-relaxed">
+                        {update.message}
+                      </div>
+                    </div>
+                    
+                    {/* 更新状态和时间 */}
+                    <div className="flex flex-col items-end gap-2">
+                      <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-xl text-sm font-semibold shadow-md">
+                        <i className="fas fa-check-circle mr-2 text-green-500"></i>
+                        Updated
+                      </span>
+                      <div className="text-sm text-gray-500 font-medium">
+                        📅 {update.date}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </div>
