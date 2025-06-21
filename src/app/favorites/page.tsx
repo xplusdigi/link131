@@ -45,24 +45,24 @@ export default function FavoritesPage() {
   return (
     <Layout 
       currentPath="/favorites"
-      title="Favorites - BetLink"
+      title="Favorites - Link131"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl font-bold text-slate-200 mb-4">
             My Favorites
           </h1>
-          <p className="text-gray-600 mb-8">
+          <p className="text-slate-300 mb-8">
             Your saved favorite brands will appear here
           </p>
           
           {favoriteBrands.length === 0 ? (
             <div className="text-center py-12">
-              <i className="fas fa-heart text-4xl text-gray-400 mb-4"></i>
-              <p className="text-gray-500 text-lg mb-4">
+              <i className="fas fa-heart text-4xl text-slate-500 mb-4"></i>
+              <p className="text-slate-400 text-lg mb-4">
                 No favorites yet. Start adding some brands to your favorites!
               </p>
-              <p className="text-gray-400 text-sm">
+              <p className="text-slate-500 text-sm">
                 Click the heart icon on any brand card to add it to your favorites
               </p>
             </div>

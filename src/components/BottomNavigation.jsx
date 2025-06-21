@@ -69,13 +69,13 @@ const BottomNavigation = ({
   return (
     <nav className={`
       fixed bottom-0 left-0 right-0 z-50
-      bg-white/80 backdrop-blur-lg
-      border-t border-white/30 shadow-2xl
+      bg-slate-800/90 backdrop-blur-lg
+      border-t border-slate-700/50 shadow-2xl
       ${hideOnDesktop ? 'md:hidden' : ''} 
       ${className}
     `}>
       {/* 顶部渐变装饰线 */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 opacity-70"></div>
       
       <div className="flex justify-around items-center py-3 px-2">
         {navItems.map((item) => {
@@ -89,15 +89,15 @@ const BottomNavigation = ({
                 relative flex flex-col items-center py-3 px-4 rounded-2xl
                 transition-all duration-300 transform hover:scale-105 active:scale-95
                 ${active 
-                  ? 'text-blue-600 bg-gradient-to-t from-blue-50 to-indigo-50 shadow-lg' 
-                  : 'text-gray-600 hover:text-blue-600 hover:bg-gradient-to-t hover:from-blue-50/50 hover:to-indigo-50/50'
+                  ? 'text-blue-400 bg-gradient-to-t from-slate-700 to-slate-600 shadow-lg' 
+                  : 'text-slate-400 hover:text-blue-400 hover:bg-gradient-to-t hover:from-slate-700/50 hover:to-slate-600/50'
                 }
               `}
               title={item.label}
             >
               {/* 背景光晕效果 */}
               {active && (
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-100/50 to-indigo-100/50 rounded-2xl blur-sm"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-600/50 to-slate-500/50 rounded-2xl blur-sm"></div>
               )}
               
               {/* 图标 */}
@@ -116,7 +116,7 @@ const BottomNavigation = ({
               
               {/* 活跃状态指示器 */}
               {active && (
-                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full shadow-lg"></div>
+                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full shadow-lg"></div>
               )}
             </Link>
           );

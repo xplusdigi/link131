@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-/* 浅色模式样式 */
+/* 深色模式样式 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  --foreground: #e2e8f0;
 }
 
 @theme inline {
@@ -14,7 +14,8 @@
 }
 
 body {
-  background: var(--background);
+  background: #0f172a;
+  min-height: 100vh;
   color: var(--foreground);
   font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
@@ -95,17 +96,17 @@ body {
   background-size: 200px 100%;
 }
 
-/* 玻璃拟态效果 */
+/* 玻璃拟态效果 - 深色主题 */
 .glass {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(30, 41, 59, 0.4);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(30, 41, 59, 0.6);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
 /* 渐变文字 */
@@ -128,29 +129,29 @@ html {
   scroll-behavior: smooth;
 }
 
-/* 自定义滚动条 */
+/* 自定义滚动条 - 简约深色主题 */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #1e293b;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #64748b;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  background: #94a3b8;
 }
 
-/* 选择文本样式 */
+/* 选择文本样式 - 深色主题 */
 ::selection {
-  background: rgba(102, 126, 234, 0.3);
-  color: #1f2937;
+  background: rgba(100, 116, 139, 0.4);
+  color: #e2e8f0;
 }
 
 /* 焦点状态优化 */
@@ -171,4 +172,14 @@ html {
 /* 按钮悬停效果 */
 .btn-hover {
   @apply transition-all duration-300 transform hover:scale-105 active:scale-95;
+}
+
+/* 隐藏滚动条但保持滚动功能 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }

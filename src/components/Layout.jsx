@@ -15,13 +15,13 @@ import BottomNavigation from './BottomNavigation';
 const Layout = ({ 
   children, 
   showBackButton = false,
-  title = "BetLink",
+  title = "Link131",
   showBottomNav = true,
   className = "",
   currentPath = ""
 }) => {
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 ${className}`}>
+    <div className={`min-h-screen bg-slate-900 ${className}`}>
       {/* 顶部导航栏 */}
       <Header 
         showBackButton={showBackButton}

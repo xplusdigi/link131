@@ -17,7 +17,7 @@ export const brands = [
     category: 'Sports Betting',
     logo: '/assets/brands/jilibet-ico.jpg',
     badge: 'hot',
-    badgeText: 'Hot',
+    badgeText: '🔥 Hot',
     status: 'active',
     statusText: 'Active',
     description: 'Leading online sports betting platform in the Philippines, offering global sports event betting services.',
@@ -73,7 +73,7 @@ export const brands = [
     category: 'Live Casino',
     logo: 'https://via.placeholder.com/80x80/e74c3c/ffffff?text=NG',
     badge: 'new',
-    badgeText: 'New',
+    badgeText: '🆕 New',
     status: 'active',
     statusText: 'Active',
     description: 'Professional online live entertainment platform, offering classic games like Baccarat and Roulette.',
@@ -129,8 +129,8 @@ export const brands = [
     url: 'https://swertres.gov.ph',
     category: 'Lottery',
     logo: 'https://via.placeholder.com/80x80/27ae60/ffffff?text=SW',
-    badge: 'popular',
-    badgeText: 'Popular',
+    badge: 'trending',
+    badgeText: '📈 Trending',
     status: 'updating',
     statusText: 'Updating',
     description: 'Official Philippine lottery platform, offering classic lottery games like SWERTRES.',
@@ -182,8 +182,8 @@ export const brands = [
     url: 'https://luckycola.com',
     category: 'Slots',
     logo: 'https://via.placeholder.com/80x80/9b59b6/ffffff?text=LC',
-    badge: 'recommended',
-    badgeText: 'Recommended',
+    badge: 'official',
+    badgeText: '🏅 Official',
     status: 'active',
     statusText: 'Active',
     description: 'Rich slot machine gaming platform with hundreds of premium slot games.',
@@ -240,7 +240,7 @@ export const brands = [
     category: 'Bingo',
     logo: 'https://via.placeholder.com/80x80/f39c12/ffffff?text=BP',
     badge: 'trending',
-    badgeText: 'Trending',
+    badgeText: '📈 Trending',
     status: 'active',
     statusText: 'Active',
     description: 'Interactive bingo gaming platform with live hosts and exciting prizes.',
@@ -304,7 +304,7 @@ export const brands = [
     category: 'Sports Betting',
     logo: 'https://via.placeholder.com/80x80/2ecc71/ffffff?text=P88',
     badge: 'hot',
-    badgeText: 'Hot',
+    badgeText: '🔥 Hot',
     status: 'active',
     statusText: 'Active',
     description: 'Premier sports betting platform with competitive odds and extensive market coverage.',
@@ -367,7 +367,7 @@ export const brands = [
     category: 'Digital Lottery',
     logo: 'https://via.placeholder.com/80x80/3498db/ffffff?text=GL',
     badge: 'official',
-    badgeText: 'Official',
+    badgeText: '🏅 Official',
     status: 'active',
     statusText: 'Active',
     description: 'Official digital lottery platform integrated with GCash mobile payment system.',
@@ -425,8 +425,8 @@ export const brands = [
     url: 'https://philweb.com.ph',
     category: 'Multi-Gaming',
     logo: 'https://via.placeholder.com/80x80/8e44ad/ffffff?text=PW',
-    badge: 'established',
-    badgeText: 'Established',
+    badge: 'new',
+    badgeText: '🆕 New',
     status: 'inactive',
     statusText: 'Maintenance',
     description: 'Established multi-gaming platform offering various casino and betting options.',
@@ -603,39 +603,24 @@ export const sortOptions = [
 // 徽章类型配置
 export const badgeConfig = {
   hot: {
-    className: 'bg-orange-500 text-white',
-    icon: 'fas fa-fire',
-    label: 'Hot'
+    className: 'bg-red-500 text-white',
+    icon: 'fas fa-fire-flame-curved',
+    label: '🔥 Hot'
   },
   new: {
-    className: 'bg-blue-500 text-white',
-    icon: 'fas fa-star',
-    label: 'New'
-  },
-  popular: {
-    className: 'bg-purple-500 text-white',
-    icon: 'fas fa-heart',
-    label: 'Popular'
-  },
-  recommended: {
-    className: 'bg-green-500 text-white',
-    icon: 'fas fa-thumbs-up',
-    label: 'Recommended'
+    className: 'bg-emerald-500 text-white',
+    icon: 'fas fa-sparkles',
+    label: '🆕 New'
   },
   trending: {
-    className: 'bg-pink-500 text-white',
-    icon: 'fas fa-trending-up',
-    label: 'Trending'
+    className: 'bg-cyan-500 text-white',
+    icon: 'fas fa-chart-line',
+    label: '📈 Trending'
   },
   official: {
-    className: 'bg-indigo-500 text-white',
-    icon: 'fas fa-certificate',
-    label: 'Official'
-  },
-  established: {
-    className: 'bg-gray-600 text-white',
-    icon: 'fas fa-building',
-    label: 'Established'
+    className: 'bg-amber-500 text-white',
+    icon: 'fas fa-shield-check',
+    label: '🏅 Official'
   }
 };
 

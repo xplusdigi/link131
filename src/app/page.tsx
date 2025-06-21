@@ -1,5 +1,5 @@
 /**
- * BetLink 主页组件 - 使用Layout组件重构版本
+ * Link131 主页组件 - 使用Layout组件重构版本
  * 
  * 这是一个博彩网站URL查询助手的主页面，主要功能包括：
  * 1. 展示热门博彩品牌信息和URL
@@ -67,144 +67,129 @@ const Page = () => {
   return (
     <Layout 
       currentPath="/"
-      title="BetLink"
+      title="Link131"
     >
       {/* 页面内容区域 - 由Layout组件管理 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        {/* 欢迎区域和搜索功能 */}
-        <section className="relative text-center mb-16 py-12">
-          {/* 背景装饰 */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-3xl -z-10"></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 to-purple-100/30 rounded-3xl -z-10 animate-pulse"></div>
+        {/* 简约欢迎区域 */}
+        <section className="text-center mb-16 py-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-200 mb-4">
+            Link131
+          </h1>
+          <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
+            Find the latest URLs for Philippine betting platforms
+          </p>
           
-          {/* 页面标题和描述 */}
-          <div className="relative z-10">
-            <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-6 animate-fadeIn">
-              Welcome to BetLink
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-              🎰 Quickly find the latest available URLs for major Philippine betting brands 🇵🇭
-            </p>
-            
-            {/* 搜索栏 */}
-            <div className="relative max-w-lg mx-auto group">
-              {/* 搜索栏装饰光晕 */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-              
-              <div className="relative">
-                {/* 搜索图标 */}
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <i className="fas fa-search text-blue-500 text-lg"></i>
-                </div>
-                
-                {/* 搜索输入框 */}
-                <input
-                  type="text"
-                  placeholder="🔍 Search brand name..."
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    setShowSearchResults(e.target.value.length > 0);
-                  }}
-                  className="w-full pl-12 pr-6 py-4 border-2 border-white/50 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 bg-white/80 backdrop-blur-sm text-gray-900 shadow-xl transition-all duration-300 text-lg font-medium placeholder-gray-500"
-                />
-                
-                {/* 搜索按钮 */}
-                <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
-                  <button className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg">
-                    <i className="fas fa-arrow-right"></i>
-                  </button>
-                </div>
+          {/* 简约搜索栏 */}
+          <div className="max-w-md mx-auto mb-6">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i className="fas fa-search text-slate-500"></i>
               </div>
-              
-              {/* 搜索结果下拉框 */}
-              {showSearchResults && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white/90 backdrop-blur-md border border-white/30 rounded-2xl shadow-2xl z-20 overflow-hidden">
-                  <div className="p-6 text-sm text-gray-500">
-                    🔍 Search results will appear here...
-                  </div>
-                </div>
-              )}
+              <input
+                type="text"
+                placeholder="Search brands..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSearchResults(e.target.value.length > 0);
+                }}
+                className="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-slate-600 text-slate-200 placeholder-slate-500"
+              />
             </div>
             
-            {/* 统计信息 */}
-            <div className="flex justify-center items-center gap-8 mt-8 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span>{brands.filter(b => b.status === 'active').length} Active Brands</span>
+            {/* 简约搜索结果 */}
+            {showSearchResults && (
+              <div className="absolute mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-lg z-20">
+                <div className="p-4 text-sm text-slate-400">
+                  Search results will appear here...
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                <span>{brands.length} Total Brands</span>
+            )}
+          </div>
+          
+          {/* 优化统计部分 */}
+          <div className="flex justify-center items-center gap-4 max-w-sm mx-auto">
+            <div className="flex-1 bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-2.5 h-2.5 bg-green-400 rounded-full"></div>
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-slate-200">
+                    {brands.filter(b => b.status === 'active').length}
+                  </div>
+                  <div className="text-xs text-slate-400">Active</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-1 bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-2.5 h-2.5 bg-blue-400 rounded-full"></div>
+                <div className="text-center">
+                  <div className="text-lg font-semibold text-slate-200">
+                    {brands.length}
+                  </div>
+                  <div className="text-xs text-slate-400">Total</div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 状态筛选导航 */}
+        {/* 独立状态筛选按钮 */}
         <section className="mb-12">
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4">Filter by Status</h3>
-            <div className="flex flex-wrap justify-center gap-3">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-3 justify-center min-w-max px-4">
               {statusOptions.map((status) => (
                 <button
                   key={status.value}
                   onClick={() => setActiveStatus(status.value)}
-                  className={`relative px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg ${
+                  className={`flex-shrink-0 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 border ${
                     activeStatus === status.value
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-200' 
-                      : 'bg-white/70 backdrop-blur-sm text-gray-700 hover:bg-white hover:shadow-xl border border-white/50'
+                      ? 'bg-slate-700 text-slate-100 border-slate-600 shadow-lg' 
+                      : 'bg-slate-800/50 text-slate-400 border-slate-700/50 hover:text-slate-200 hover:bg-slate-700/50 hover:border-slate-600/50'
                   }`}
-                  title={`Filter ${status.label} brands`}
                 >
-                  {/* 选中状态装饰 */}
-                  {activeStatus === status.value && (
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-30"></div>
-                  )}
-                  <span className="relative">{status.label}</span>
+                  <span className="flex items-center gap-2 whitespace-nowrap">
+                    {status.value === 'active' && <div className="w-2.5 h-2.5 bg-green-400 rounded-full"></div>}
+                    {status.value === 'updating' && <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>}
+                    {status.value === 'inactive' && <div className="w-2.5 h-2.5 bg-red-400 rounded-full"></div>}
+                    {status.value === 'all' && <div className="w-2.5 h-2.5 bg-blue-400 rounded-full"></div>}
+                    {status.label}
+                  </span>
                 </button>
               ))}
             </div>
           </div>
         </section>
 
-        {/* 热门品牌展示区域 */}
+        {/* 品牌展示区域 */}
         <section className="mb-16">
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-            {/* 区域标题 */}
-            <div className="flex items-center">
-              <div className="relative mr-3">
-                <i className="fas fa-fire text-3xl bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"></i>
-                <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full blur opacity-30 animate-pulse"></div>
+          <div className="flex justify-between items-center mb-8">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <i className="fas fa-fire text-2xl text-orange-400"></i>
+                <div className="absolute -top-1 -right-1 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
               </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent">
+              <h2 className="text-2xl font-semibold text-slate-300">
                 Hot Brands
               </h2>
             </div>
-            
-            {/* 查看全部按钮 */}
             <a
               href="/all-brands"
-              className="group relative px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl hover:from-blue-700 hover:to-indigo-700 font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
-              title="View all brands"
+              className="group flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-slate-600 rounded-xl text-slate-400 hover:text-slate-200 text-sm transition-all duration-200 transform hover:scale-105"
             >
-              <span className="flex items-center">
-                View All Brands
-                <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
-              </span>
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+              <span>View all</span>
+              <i className="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-200"></i>
             </a>
           </div>
           
           {/* 品牌卡片网格布局 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredBrands.length === 0 ? (
-              // 无搜索结果时的提示
               <div className="col-span-full text-center py-12">
-                <i className="fas fa-search text-4xl text-gray-400 mb-4"></i>
-                <p className="text-gray-500">
-                  No brands found matching your criteria. Try different search terms or filters.
+                <p className="text-slate-500">
+                  No brands found
                 </p>
               </div>
             ) : (
@@ -223,66 +208,53 @@ const Page = () => {
           </div>
         </section>
 
-        {/* 最近更新区域 */}
-        <section className="relative">
-          {/* 背景装饰 */}
-          <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-emerald-50 rounded-3xl -z-10"></div>
-          
-          <div className="relative p-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-              {/* 区域标题 */}
-              <div className="flex items-center">
-                <div className="relative mr-3">
-                  <i className="fas fa-clock text-3xl bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent"></i>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full blur opacity-30 animate-pulse"></div>
-                </div>
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent">
-                  Recent Updates
-                </h2>
-              </div>
-              
-              {/* 刷新按钮 */}
-              <button
-                onClick={() => window.location.reload()}
-                className="group relative px-6 py-3 bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl text-gray-700 hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 font-semibold"
-                title="Refresh page to get latest data"
-              >
-                <span className="flex items-center">
-                  <i className="fas fa-sync-alt mr-2 group-hover:rotate-180 transition-transform duration-500"></i>
-                  Refresh
-                </span>
-              </button>
+        {/* 优化更新列表 */}
+        <section>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="relative">
+              <i className="fas fa-clock text-xl text-blue-400"></i>
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
             </div>
-            
-            {/* 更新列表 */}
-            <div className="space-y-4">
-              {recentUpdates.map((update, index) => (
-                <div key={index} className="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/40 p-6 hover:shadow-xl hover:bg-white transition-all duration-300 transform hover:-translate-y-1">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    {/* 更新信息 */}
-                    <div className="flex-1">
-                      <div className="font-bold text-gray-900 text-lg mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                        {update.brandName}
-                      </div>
-                      <div className="text-gray-600 leading-relaxed">
-                        {update.message}
-                      </div>
+            <h2 className="text-2xl font-semibold text-slate-300">
+              Recent Updates
+            </h2>
+          </div>
+          
+          <div className="space-y-3">
+            {recentUpdates.map((update, index) => (
+              <div key={index} className="group bg-slate-800/50 hover:bg-slate-800/80 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-200 transform hover:scale-[1.02]">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      update.type === 'url_update' ? 'bg-blue-500/20 text-blue-400' :
+                      update.type === 'feature_update' ? 'bg-green-500/20 text-green-400' :
+                      update.type === 'promotion' ? 'bg-purple-500/20 text-purple-400' :
+                      update.type === 'maintenance' ? 'bg-yellow-500/20 text-yellow-400' :
+                      'bg-orange-500/20 text-orange-400'
+                    }`}>
+                      <i className={`${update.icon} text-sm`}></i>
                     </div>
-                    
-                    {/* 更新状态和时间 */}
-                    <div className="flex flex-col items-end gap-2">
-                      <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-xl text-sm font-semibold shadow-md">
-                        <i className="fas fa-check-circle mr-2 text-green-500"></i>
-                        Updated
-                      </span>
-                      <div className="text-sm text-gray-500 font-medium">
-                        📅 {update.date}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex justify-between items-start gap-3">
+                      <div>
+                        <div className="font-semibold text-slate-200 mb-1.5 group-hover:text-slate-100">
+                          {update.brandName}
+                        </div>
+                        <div className="text-slate-400 text-sm leading-relaxed">
+                          {update.message}
+                        </div>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <div className="text-slate-500 text-xs font-medium">
+                          {update.date}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </section>
       </div>
