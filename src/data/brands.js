@@ -59,6 +59,11 @@ export const brands = [
       '/assets/brands/jilibet-home.jpg',
       '/assets/brands/jilibet-sports.jpg',
       '/assets/brands/jilibet-mobile.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://jilibet.com', date: '2024-01-15', status: 'current', note: 'Official main site' },
+      { url: 'https://jilibet.co', date: '2024-01-10', status: 'backup', note: 'Alternative domain' },
+      { url: 'https://jili888.com', date: '2023-12-20', status: 'archived', note: 'Previous domain' }
     ]
   },
   {
@@ -111,6 +116,11 @@ export const brands = [
       '/assets/brands/nuebe-lobby.jpg',
       '/assets/brands/nuebe-baccarat.jpg',
       '/assets/brands/nuebe-roulette.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://nuebegaming.ph', date: '2024-01-12', status: 'current', note: 'Official website' },
+      { url: 'https://nuebe.live', date: '2024-01-08', status: 'backup', note: 'Live games portal' },
+      { url: 'https://nuebecasino.com', date: '2023-11-15', status: 'archived', note: 'Previous domain' }
     ]
   },
   {
@@ -159,6 +169,11 @@ export const brands = [
       '/assets/brands/swertres-official.jpg',
       '/assets/brands/swertres-results.jpg',
       '/assets/brands/swertres-outlets.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://swertres.gov.ph', date: '2024-01-10', status: 'current', note: 'Official PCSO site' },
+      { url: 'https://pcso.gov.ph/swertres', date: '2023-12-01', status: 'backup', note: 'PCSO portal' },
+      { url: 'https://swertres-result.com', date: '2023-10-15', status: 'archived', note: 'Results portal' }
     ]
   },
   {
@@ -211,6 +226,11 @@ export const brands = [
       '/assets/brands/luckycola-lobby.jpg',
       '/assets/brands/luckycola-slots.jpg',
       '/assets/brands/luckycola-jackpots.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://luckycola.com', date: '2024-01-14', status: 'current', note: 'Main gaming site' },
+      { url: 'https://luckycola.vip', date: '2024-01-05', status: 'backup', note: 'VIP player portal' },
+      { url: 'https://cola-slots.com', date: '2023-09-12', status: 'archived', note: 'Previous brand name' }
     ]
   },
   {
@@ -270,6 +290,11 @@ export const brands = [
       '/assets/brands/bingoplus-live.jpg',
       '/assets/brands/bingoplus-rooms.jpg',
       '/assets/brands/bingoplus-community.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://bingoplus.com', date: '2024-01-13', status: 'current', note: 'Main bingo platform' },
+      { url: 'https://bingoplus.live', date: '2023-12-18', status: 'backup', note: 'Live streaming portal' },
+      { url: 'https://bingo-ph.com', date: '2023-08-20', status: 'archived', note: 'Original launch domain' }
     ]
   },
   {
@@ -328,6 +353,11 @@ export const brands = [
       '/assets/brands/peso88-sportsbook.jpg',
       '/assets/brands/peso88-live.jpg',
       '/assets/brands/peso88-mobile.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://peso88.com', date: '2024-01-16', status: 'current', note: 'Main sportsbook site' },
+      { url: 'https://peso88.net', date: '2024-01-08', status: 'backup', note: 'Mirror site' },
+      { url: 'https://peso-betting.com', date: '2023-07-15', status: 'archived', note: 'Former brand domain' }
     ]
   },
   {
@@ -382,6 +412,11 @@ export const brands = [
       '/assets/brands/gcash-lottery-app.jpg',
       '/assets/brands/gcash-lottery-purchase.jpg',
       '/assets/brands/gcash-lottery-results.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://gcash.com/lottery', date: '2024-01-11', status: 'current', note: 'GCash app lottery section' },
+      { url: 'https://lottery.gcash.com', date: '2023-11-20', status: 'backup', note: 'Dedicated lottery portal' },
+      { url: 'https://gcash-lotto.ph', date: '2023-06-10', status: 'archived', note: 'Beta version' }
     ]
   },
   {
@@ -431,6 +466,11 @@ export const brands = [
       '/assets/brands/philweb-legacy.jpg',
       '/assets/brands/philweb-games.jpg',
       '/assets/brands/philweb-maintenance.jpg'
+    ],
+    urlHistory: [
+      { url: 'https://philweb.com.ph', date: '2024-01-05', status: 'current', note: 'Under maintenance' },
+      { url: 'https://philweb-gaming.com', date: '2023-10-15', status: 'backup', note: 'Gaming portal' },
+      { url: 'https://philweb.net', date: '2023-03-20', status: 'archived', note: 'Legacy platform' }
     ]
   }
 ];

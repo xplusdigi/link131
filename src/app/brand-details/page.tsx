@@ -4,8 +4,9 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Layout from '../../components/Layout';
+import BrandCard from '../../components/BrandCard';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { getBrandById } from '../../data/brands';
+import { getBrandById, getRelatedBrands } from '../../data/brands';
 import { copyToClipboard } from '../../utils/clipboard';
 
 interface Brand {
@@ -21,8 +22,12 @@ interface Brand {
   license?: string;
   minDeposit?: string;
   maxPayout?: string;
-  pros?: string[];
-  cons?: string[];
+  urlHistory?: {
+    url: string;
+    date: string;
+    status: string;
+    note: string;
+  }[];
 }
 
 function BrandDetailsContent() {
@@ -30,6 +35,7 @@ function BrandDetailsContent() {
   const brandId = searchParams.get('id');
   
   const [brand, setBrand] = useState<Brand | null>(null);
+  const [relatedBrands, setRelatedBrands] = useState<Brand[]>([]);
   const [favorites, setFavorites] = useLocalStorage('favorites', []);
   const [copiedUrl, setCopiedUrl] = useState<number | null>(null);
 
@@ -38,6 +44,7 @@ function BrandDetailsContent() {
       const foundBrand = getBrandById(parseInt(brandId));
       if (foundBrand) {
         setBrand(foundBrand);
+        setRelatedBrands(getRelatedBrands(foundBrand.id, foundBrand.category, 3));
       }
     }
   }, [brandId]);
@@ -55,6 +62,24 @@ function BrandDetailsContent() {
       ? favorites.filter((id: number) => id !== brandId)
       : [...favorites, brandId];
     setFavorites(newFavorites);
+  };
+
+  const shareUrl = async () => {
+    const shareData = {
+      title: `${brand?.name} - BetLink`,
+      text: `Check out ${brand?.name} on BetLink`,
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        copyUrl(window.location.href, brand?.id || 0);
+      }
+    } else {
+      copyUrl(window.location.href, brand?.id || 0);
+    }
   };
 
   const renderStars = (rating: number) => {
@@ -130,6 +155,15 @@ function BrandDetailsContent() {
             </div>
             
             <div className="flex flex-col gap-3">
+              <a
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors text-center"
+              >
+                🌐 Visit Site
+              </a>
+              
               <button
                 onClick={() => copyUrl(brand.url, brand.id)}
                 className={`px-6 py-3 rounded-lg font-medium transition-colors ${
@@ -138,7 +172,7 @@ function BrandDetailsContent() {
                     : 'bg-blue-600 text-white hover:bg-blue-700'
                 }`}
               >
-                {copiedUrl === brand.id ? 'Copied!' : 'Copy URL'}
+                {copiedUrl === brand.id ? '✓ Copied!' : '📋 Copy URL'}
               </button>
               
               <button
@@ -151,6 +185,13 @@ function BrandDetailsContent() {
               >
                 {favorites.includes(brand.id) ? '♥ Saved' : '♡ Save'}
               </button>
+              
+              <button
+                onClick={shareUrl}
+                className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+              >
+                📤 Share
+              </button>
             </div>
           </div>
         </div>
@@ -159,40 +200,38 @@ function BrandDetailsContent() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Pros and Cons */}
-            {(brand.pros || brand.cons) && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {brand.pros && (
-                  <div className="bg-green-50 rounded-xl border border-green-200 p-6">
-                    <h3 className="text-lg font-semibold text-green-800 mb-4">
-                      👍 Pros
-                    </h3>
-                    <ul className="space-y-2">
-                      {brand.pros.map((pro: string, index: number) => (
-                        <li key={index} className="flex items-start gap-2 text-green-700">
-                          <span className="text-green-500">✓</span>
-                          <span>{pro}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {brand.cons && (
-                  <div className="bg-red-50 rounded-xl border border-red-200 p-6">
-                    <h3 className="text-lg font-semibold text-red-800 mb-4">
-                      👎 Cons
-                    </h3>
-                    <ul className="space-y-2">
-                      {brand.cons.map((con: string, index: number) => (
-                        <li key={index} className="flex items-start gap-2 text-red-700">
-                          <span className="text-red-500">✗</span>
-                          <span>{con}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+            {/* URL History */}
+            {brand.urlHistory && brand.urlHistory.length > 0 && (
+              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">🔗 URL History</h3>
+                <div className="space-y-3">
+                  {brand.urlHistory.map((urlRecord, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <span 
+                            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                              urlRecord.status === 'current' ? 'bg-green-100 text-green-800' :
+                              urlRecord.status === 'backup' ? 'bg-blue-100 text-blue-800' :
+                              'bg-gray-100 text-gray-800'
+                            }`}
+                          >
+                            {urlRecord.status}
+                          </span>
+                          <span className="text-sm text-gray-600">{urlRecord.date}</span>
+                        </div>
+                        <p className="text-sm font-medium text-gray-900 mt-1">{urlRecord.url}</p>
+                        <p className="text-xs text-gray-500">{urlRecord.note}</p>
+                      </div>
+                      <button
+                        onClick={() => copyUrl(urlRecord.url, brand.id)}
+                        className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                      >
+                        📋
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -224,21 +263,64 @@ function BrandDetailsContent() {
               </div>
             </div>
 
-            {/* Visit Website */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-6 text-white text-center">
-              <h3 className="text-lg font-semibold mb-2">Ready to Play?</h3>
-              <p className="text-blue-100 mb-4 text-sm">Visit the official website</p>
-              <a
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-              >
-                Visit {brand.name} →
-              </a>
+            {/* Current URL */}
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg p-6 text-white">
+              <h3 className="text-lg font-semibold mb-4">🌐 Current Available URL</h3>
+              <div className="bg-white bg-opacity-20 rounded-lg p-4 mb-4">
+                <p className="text-blue-100 text-sm mb-2">Official Website</p>
+                <p className="font-mono text-sm break-all">{brand.url}</p>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => copyUrl(brand.url, brand.id)}
+                  className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                    copiedUrl === brand.id
+                      ? 'bg-green-500 text-white'
+                      : 'bg-white bg-opacity-20 text-white hover:bg-opacity-30'
+                  }`}
+                >
+                  {copiedUrl === brand.id ? '✓ Copied' : '📋 Copy'}
+                </button>
+                <a
+                  href={brand.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-2 px-4 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-50 transition-colors text-center"
+                >
+                  🌐 Visit
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Related Brands */}
+        {relatedBrands.length > 0 && (
+          <div className="mt-12">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Related Recommendations</h2>
+              <Link
+                href="/all-brands"
+                className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+              >
+                View All →
+              </Link>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedBrands.map((relatedBrand) => (
+                <BrandCard
+                  key={relatedBrand.id}
+                  brand={relatedBrand}
+                  isFavorite={favorites.includes(relatedBrand.id)}
+                  onCopyUrl={copyUrl}
+                  onToggleFavorite={toggleFavorite}
+                  copiedUrl={copiedUrl}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );
